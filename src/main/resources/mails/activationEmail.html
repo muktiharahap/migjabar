@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>MigJabar activation</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="shortcut icon"/>
+</head>
+<body>
+<p>
+    Dear <span th:text="${userName}"></span>
+</p>
+<p>
+    UserName : <span th:text="${userName}"></span>
+</p>
+<p>
+    Password : <span th:text="${password}"></span>
+</p>
+<p>
+    Your MigJabar account has been created, please click on the URL below to download app:
+</p>
+<p>
+    <a th:href="@{|${baseUrl}|}" th:text="${baseUrl}" target="_blank">Download Link</a>
+</p>
+<p>
+    <span>Regards, </span>
+    <br/>
+    &emsp;<em>MigJabar.</em>
+</p>
+</body>
+</html>

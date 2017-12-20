@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="layout">
+<head>
+    <title>Edit Profile</title>
+</head>
+<body>
+<div layout:fragment="breadcrumb">
+    <h1>Form Edit Profile</h1>
+    <ol class="breadcrumb">
+        <li><a href="/"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li class="active">Form Edit Profile</li>
+    </ol>
+</div>
+<div layout:fragment="content">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box box-info">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Form</h3>
+                </div>
+                <div class="box-body">
+                    <form th:action="@{/editprofile}" th:object="${profile}" method="post">
+                        <input type="hidden" th:field="*{id}" />
+                        <input type="hidden" th:field="*{login}" />
+                        <input type="hidden" th:field="*{password}" />
+
+                        <div class="col-sm-6">
+                            <div class="form-group" >
+                                <label>First Name</label>
+                                <input type="text" th:field="*{firstName}" name="nama" class="form-control" placeholder="First Name" />
+                                <label class="control-label error-label" th:errors="*{firstName}"></label>
+                            </div>
+                            <div class="form-group" >
+                                <label>Last Name</label>
+                                <input type="text" th:field="*{lastName}" name="nidn" class="form-control" placeholder="Last Name" />
+                                <label class="control-label error-label" th:errors="*{lastName}" ></label>
+                            </div>
+                            <!--nip/karpeg-->
+                            <div class="form-group">
+                                <label>Email</label>
+                                <input type="text" class="form-control" th:field="*{email}" placeholder="Email" />
+                                <label class="control-label error-label" th:errors="*{email}"></label>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Nik</label>
+                                <input type="text" class="form-control" th:field="*{nik}" placeholder="Nik" />
+                                <label class="control-label error-label" th:errors="*{nik}"></label>
+                            </div>
+
+                            <div class="form-group" >
+                                <label>Notel</label>
+                                <input type="text" th:field="*{notel}" name="email" class="form-control" placeholder="Notel" />
+                                <label class="control-label error-label" th:errors="*{notel}" ></label>
+                            </div>
+
+                            <div class="form-group pull-right">
+                                <button onclick="return confirm('Yakin ingin menyimpan data ini ?')" type="submit" class="btn btn-primary"><span class="fa fa-floppy-o"></span>&nbsp;Simpan</button>
+                            </div>
+
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" th:inline="javascript">
+        /*<![CDATA[*/
+        $(document).ready(function () {
+
+        });
+        /*]]>*/
+    </script>
+</div>
+</body>
+</html>

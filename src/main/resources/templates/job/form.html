@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="layout">
+    <head>
+        <title>Edit Data Job</title>
+    </head>
+    <body>
+        <div layout:fragment="breadcrumb">
+            <h1>Form Data Job</h1>
+            <ol class="breadcrumb">
+                <li><a href="/"><i class="fa fa-dashboard"></i> Home</a></li>
+                <li class="active">Form Job</li>
+            </ol>
+        </div>
+        <div layout:fragment="content">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="box box-info">
+                        <div class="box-header with-border">
+                            <h3 class="box-title">Form</h3>
+                        </div>
+                        <div class="box-body">
+                            <form th:action="@{/job/form}" th:object="${job}" method="post">
+                                <input type="hidden" th:field="*{id}" />
+
+                                <div class="col-sm-6">
+                                    <div class="form-group" >
+                                        <label>Notel</label>
+                                        <input type="text" th:field="*{notel}" name="notel" class="form-control" placeholder="Notel" />
+                                        <label class="control-label error-label" th:errors="*{notel}"></label>
+                                    </div>
+                                    <div class="form-group" >
+                                        <label>Swo</label>
+                                        <select th:field="*{sow}" class="form-control" required="true">
+                                            <option value="IP">1P</option>
+                                            <option value="IIP">2P</option>
+                                            <option value="IIIP">3P</option>
+                                        </select>
+                                        <label class="control-label error-label" th:errors="*{sow}" ></label>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label>Mig</label>
+                                        <select th:field="*{sow}" class="form-control" required="true">
+                                            <option value="TITO">TITO</option>
+                                            <option value="NTITO">NTITO</option>
+                                            <option value="EI">EI</option>
+                                        </select>
+                                        <label class="control-label error-label" th:errors="*{mig}"></label>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label>Sc</label>
+                                        <input type="text" class="form-control" th:field="*{sc}" placeholder="Sc" />
+                                        <label class="control-label error-label" th:errors="*{sc}"></label>
+                                    </div>
+
+                                    <div class="form-group" >
+                                        <label>Sto</label>
+                                        <input type="text" th:field="*{sto}" name="sto" class="form-control" placeholder="Sto" />
+                                        <label class="control-label error-label" th:errors="*{sto}" ></label>
+                                    </div>
+
+                                    <div class="form-group" >
+                                        <label>Odp</label>
+                                        <input type="text" th:field="*{odp}" class="form-control" placeholder="Odp" />
+                                        <label class="control-label error-label" th:errors="*{odp}" ></label>
+                                    </div>
+
+                                    <div class="form-group" >
+                                        <label>Port</label>
+                                        <input type="text" th:field="*{port}" class="form-control" placeholder="Port" />
+                                        <label class="control-label error-label" th:errors="*{port}" ></label>
+                                    </div>
+
+                                    <div class="form-group" >
+                                        <label>Dc</label>
+                                        <input type="text" th:field="*{dc}" class="form-control" placeholder="Dc" />
+                                        <label class="control-label error-label" th:errors="*{dc}" ></label>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label>Scan Sn</label>
+                                        <input type="text" th:field="*{scanSn}" class="form-control" placeholder="Scan Sn" />
+                                        <label class="control-label error-label" th:errors="*{scanSn}"></label>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label>Remark</label>
+                                        <input type="text" th:field="*{remark}" class="form-control" placeholder="Remark" />
+                                        <label class="control-label error-label" th:errors="*{remark}"></label>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label>Status</label>
+                                        <select th:field="*{status}" class="form-control" required="true">
+                                            <option value="DRAFT">DRAFT</option>
+                                            <option value="DONE">DONE</option>
+                                        </select>
+                                        <label class="control-label error-label" th:errors="*{status}"></label>
+                                    </div>
+                                    <div class="form-group pull-right">
+                                        <a th:href="@{/job/list}" class="btn btn-danger" role="button">
+                                            <span aria-hidden="true"></span>Batal
+                                        </a>
+                                        <button onclick="return confirm('Yakin ingin menyimpan data ini ?')" type="submit" class="btn btn-primary">Simpan</button>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    
+                                </div>
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <script type="text/javascript" th:inline="javascript">
+                /*<![CDATA[*/
+                $(document).ready(function () {
+                    
+                });
+                /*]]>*/
+            </script>
+        </div>
+    </body>
+</html>

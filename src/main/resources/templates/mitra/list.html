@@ -1,0 +1,88 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="layout">
+<head>
+    <title>Daftar Mitra</title>
+    <script language="JavaScript">
+        $(document).ready(function () {
+            $(".remove-data").each(function () {
+                $(this).click(function () {
+                    if (confirm('Data will be deleted?'))
+                        return true;
+                    return false;
+                });
+            });
+        });
+    </script>
+    <style>
+        .noWrapColumn{
+            white-space: nowrap !important;
+        }
+    </style>
+</head>
+<body>
+<div layout:fragment="breadcrumb">
+    <h1>Daftar Mitra</h1>
+    <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li class="active">Daftar Mitra</li>
+    </ol>
+</div>
+<div layout:fragment="content">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="box box-info">
+                <div class="box-header with-border">
+                    <a class="box-title btn btn-primary" th:href="@{/mitra/form}"><i class="fa fa-plus"></i> Tambah data Mitra</a>
+                    <h3 class="box-title"></h3>
+                    <div class="box-tools">
+                        <form id="form" action="#" method="get" th:action="@{/mitra/list}">
+                            <div class="input-group input-group-sm" style="width: 250px;">
+                                <input type="text" name="value" class="form-control pull-right" placeholder="Pencarian Berdasarkan nama" th:if="${key} == null"/>
+                                <input type="text" name="value" class="form-control pull-right" placeholder="Pencarian Berdasarkan nama" th:if="${key} != null" th:value="${key}"/>
+                                <input type="hidden" name="mode" id="mode"/>
+                                <div class="input-group-btn">
+                                    <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body table-responsive no-padding">
+                    <div style="overflow: auto;">
+                        <table class="table table-bordered">
+                            <tbody>
+                            <tr th:if="${not #lists.isEmpty(data.content)}">
+                                <th class="noWrapColumn">Nama</th>
+                                <th class="noWrapColumn">Email</th>
+                                <th class="noWrapColumn">Notel</th>
+                                <th class="noWrapColumn">Action</th>
+                            </tr>
+                            <tr th:each="mitra : ${data.content}">
+                                <td class="noWrapColumn" th:text="${mitra.name}">Nama</td>
+                                <td class="noWrapColumn" th:text="${mitra.email}">Email</td>
+                                <td class="noWrapColumn" th:text="${mitra.notel}">Notel</td>
+                                <td class="col-lg-2 col-md-2 col-xs-2 text-center noWrapColumn">
+                                    <a href="form.html" th:href="@{/mitra/form?id={id}(id=${mitra.id})}" title="Edit Data Mitra"><span class=""><i class="fa fa-pencil"></i></span></a>
+                                    <a href="delete.html" th:href="@{/mitra/delete?id={id}(id=${mitra.id})}" title="Delete Data Mitra"><span class="remove-data"><i class="fa fa-remove"></i></span></a>
+                                </td>
+                            </tr>
+                            <tr th:if="${#lists.isEmpty(data.content)}">
+                                <td colspan="13" class="text-center">Data mitra tidak ditemukan</td>
+                            </tr>
+                            </tbody>
+                        </table>
+
+                        <div class="text-center" th:if="${not #lists.isEmpty(data.content)}">
+                            <ul class="pagination" sd:pagination="full"></ul>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.box-body
+                <div class="box-footer clearfix" th:include="paging :: paginationbar"></div>
+                -->
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

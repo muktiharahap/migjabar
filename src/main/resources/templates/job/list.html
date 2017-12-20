@@ -1,0 +1,103 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="layout">
+    <head>
+        <title>Daftar Job</title>
+        <script language="JavaScript">
+            $(document).ready(function () {
+                $(".remove-data").each(function () {
+                    $(this).click(function () {
+                        if (confirm('Data will be deleted?'))
+                            return true;
+                        return false;
+                    });
+                });
+            });
+        </script>
+        <style>
+            .noWrapColumn{
+                white-space: nowrap !important;
+            }
+        </style>
+    </head>
+    <body>
+        <div layout:fragment="breadcrumb">
+            <h1>Daftar Job</h1>
+            <ol class="breadcrumb">
+                <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+                <li class="active">Daftar Job</li>
+            </ol>   
+        </div>
+        <div layout:fragment="content"> 
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="box box-info">
+                        <div class="box-header with-border">
+                            <!--<a class="box-title btn btn-primary" th:href="@{/job/form}"><span class="fa fa-plus"></span> Tambah data job</a>-->
+                            <h3 class="box-title"></h3>
+                            <div class="box-tools">
+                                <form id="form" action="#" method="get" th:action="@{/job/list}">
+                                    <div class="input-group input-group-sm" style="width: 250px;">
+                                        <input type="text" name="value" class="form-control pull-right" placeholder="Pencarian Berdasarkan notel" th:if="${key} == null"/>
+                                        <input type="text" name="value" class="form-control pull-right" placeholder="Pencarian Berdasarkan notel" th:if="${key} != null" th:value="${key}"/>
+                                        <input type="hidden" name="mode" id="mode"/>
+                                        <div class="input-group-btn">
+                                            <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <!-- /.box-header -->
+                        <div class="box-body table-responsive no-padding">
+                            <div style="overflow: auto;">
+                                <table class="table table-bordered">
+                                    <tbody>
+                                        <tr th:if="${not #lists.isEmpty(data.content)}">
+                                            <th class="noWrapColumn">Notel</th>
+                                            <th class="noWrapColumn">Swo</th>
+                                            <th class="noWrapColumn">Mig</th>
+                                            <th class="noWrapColumn">Sc</th>
+                                            <th class="noWrapColumn">Sto</th>
+                                            <th class="noWrapColumn">Odp</th>
+                                            <th class="noWrapColumn">Port</th>
+                                            <th class="noWrapColumn">Dc</th>
+                                            <th class="noWrapColumn">Scan Sn</th>
+                                            <!--<th class="noWrapColumn">Status</th>-->
+                                            <th class="noWrapColumn">Action</th>
+                                        </tr>
+                                        <tr th:each="job : ${data.content}">
+                                            <td class="noWrapColumn" th:text="${job.notel}">Notel</td>
+                                            <td class="noWrapColumn" th:text="${job.sow}">Swo</td>
+                                            <td class="noWrapColumn" th:text="${job.mig}">Mig</td>
+                                            <td class="noWrapColumn" th:text="${job.sc}">Sc</td>
+                                            <td class="noWrapColumn" th:text="${job.sto}">Sto</td>
+                                            <td class="noWrapColumn" th:text="${job.odp}">odp</td>
+                                            <td class="noWrapColumn" th:text="${job.port}">Port</td>
+                                            <td class="noWrapColumn" th:text="${job.dc}">Dc</td>
+                                            <td class="noWrapColumn" th:text="${job.scanSn}">Scan Sn</td>
+                                            <!--<td class="noWrapColumn" th:text="${job.status}">Status</td>-->
+                                            <td class="col-lg-2 col-md-2 col-xs-2 text-center noWrapColumn">
+                                                <a href="form.html" th:href="@{/job/form?id={id}(id=${job.id})}" title="Edit Data Job"><span class="fa fa-pencil"></span></a>
+                                                <a href="delete.html" th:href="@{/job/delete?id={id}(id=${job.id})}" title="Delete Data Job"><span class="fa fa-remove remove-data"></span></a>
+                                                <a href="#" th:href="@{/job/downloadPDF?id={id}(id=${job.id})}" title="Download Pdf Job"><span class="fa fa-file-pdf-o remove-data"></span></a>
+                                            </td>
+                                        </tr>
+                                        <tr th:if="${#lists.isEmpty(data.content)}">
+                                            <td colspan="13" class="text-center">Data job tidak ditemukan</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+
+                                <div class="text-center" th:if="${not #lists.isEmpty(data.content)}">
+                                    <ul class="pagination" sd:pagination="full"></ul>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /.box-body
+                        <div class="box-footer clearfix" th:include="paging :: paginationbar"></div>
+                        -->
+                    </div>      
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
